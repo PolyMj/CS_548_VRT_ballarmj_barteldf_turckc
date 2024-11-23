@@ -49,3 +49,17 @@ Saved in `results\003_VRT_videosr_bi_Vimeo_7frames`
 ### Command
 
 `python main_test_vrt.py --task 004_VRT_videosr_bd_Vimeo_7frames --folder_lq testsets/Vid4/BDx4 --folder_gt testsets/Vid4/GT --tile 16 128 128 --tile_overlap 2 20 20 --num_workers 4 --save_result`
+
+### Results
+
+```
+Testing calendar             ( 0/4) - PSNR: 23.70 dB; SSIM: 0.8347; PSNR_Y: 25.57 dB; SSIM_Y: 0.8631
+Testing city                 ( 1/4) - PSNR: 30.47 dB; SSIM: 0.8905; PSNR_Y: 32.10 dB; SSIM_Y: 0.9040
+Testing foliage              ( 2/4) - PSNR: 25.80 dB; SSIM: 0.7956; PSNR_Y: 27.22 dB; SSIM_Y: 0.8078
+Testing walk                 ( 3/4) - PSNR: 30.94 dB; SSIM: 0.9249; PSNR_Y: 32.36 dB; SSIM_Y: 0.9349
+
+results/004_VRT_videosr_bd_Vimeo_7frames
+-- Average PSNR: 27.73 dB; SSIM: 0.8614; PSNR_Y: 29.31 dB; SSIM_Y: 0.8775
+```
+
+Saved in `results\004_VRT_videosr_bd_Vimeo_7frames`
