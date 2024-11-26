@@ -1,0 +1,2 @@
+python main_test_vrt.py --task 002_VRT_videosr_bi_REDS_16frames --folder_lq testsets/DVD10/lowgt --folder_gt testsets/DVD10/smalltestgt --tile 12 128 128 --tile_overlap 2 20 20 --num_workers 8 --save_result
+Average PSNR: 20.45 dB; SSIM: 0.6887; PSNR_Y: 21.81 dB; SSIM_Y: 0.7103

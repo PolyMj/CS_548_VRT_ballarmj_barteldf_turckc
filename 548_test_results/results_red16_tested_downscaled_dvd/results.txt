@@ -1,0 +1,1 @@
+python main_test_vrt.py --task 002_VRT_videosr_bi_REDS_16frames --folder_lq testsets/DVD10/lowres --tile 12 128 128 --tile_overlap 2 20 20 --num_workers 12 --save_result
