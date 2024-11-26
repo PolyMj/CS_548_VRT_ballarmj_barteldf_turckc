@@ -1,0 +1,1 @@
+python main_test_vrt.py --task 004_VRT_videosr_bd_Vimeo_7frames --folder_lq testsets/rosen/gt --tile 20 128 128 --tile_overlap 2 20 20 --num_workers 12 --save_result

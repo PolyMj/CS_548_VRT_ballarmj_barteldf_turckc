@@ -129,7 +129,7 @@ def main():
                 if img_gt.ndim == 3:
                     img_gt = np.transpose(img_gt[[2, 1, 0], :, :], (1, 2, 0))  # CHW-RGB to HCW-BGR
                 img_gt = (img_gt * 255.0).round().astype(np.uint8)  # float32 to uint8
-                img_gt = np.squeeze(img_gt)
+                #img_gt = np.squeeze(img_gt)
 
                 test_results_folder['psnr'].append(util.calculate_psnr(img, img_gt, border=0))
                 test_results_folder['ssim'].append(util.calculate_ssim(img, img_gt, border=0))
@@ -278,9 +278,10 @@ def prepare_model_dataset(args):
 
 def test_video(lq, model, args):
         '''test the video as a whole or as clips (divided temporally). '''
-
+        print("testing video")
         num_frame_testing = args.tile[0]
         if num_frame_testing:
+            print("testing as multiple clips")
             # test as multiple clips if out-of-memory
             sf = args.scale
             num_frame_overlapping = args.tile_overlap[0]
@@ -292,7 +293,12 @@ def test_video(lq, model, args):
             E = torch.zeros(b, d, c, h*sf, w*sf)
             W = torch.zeros(b, d, 1, 1, 1)
 
+            print("about to start video testing loop")
+            print("num cycles:", len(d_idx_list))
+            cindex = 0
             for d_idx in d_idx_list:
+                print("test loop", cindex)
+                cindex += 1
                 lq_clip = lq[:, d_idx:d_idx+num_frame_testing, ...]
                 out_clip = test_clip(lq_clip, model, args)
                 out_clip_mask = torch.ones((b, min(num_frame_testing, d), 1, 1, 1))
@@ -310,6 +316,7 @@ def test_video(lq, model, args):
             output = E.div_(W)
         else:
             # test as one clip (the whole video) if you have enough memory
+            print("testing as one clip")
             window_size = args.window_size
             d_old = lq.size(1)
             d_pad = (window_size[0] - d_old % window_size[0]) % window_size[0]
@@ -322,7 +329,7 @@ def test_video(lq, model, args):
 
 def test_clip(lq, model, args):
     ''' test the clip as a whole or as patches. '''
-
+    print("testing clip")
     sf = args.scale
     window_size = args.window_size
     size_patch_testing = args.tile[1]
@@ -341,12 +348,21 @@ def test_clip(lq, model, args):
         w_idx_list = list(range(0, w-size_patch_testing, stride)) + [max(0, w-size_patch_testing)]
         E = torch.zeros(b, d, c, h*sf, w*sf)
         W = torch.zeros_like(E)
-
+        print("about to start clip testing loop")
+        print("num clip loops:", len(h_idx_list))
+        hclipindex = 0
         for h_idx in h_idx_list:
+            print("h clip index:",hclipindex)
+            print("num w loops:", len(w_idx_list))
+            hclipindex += 1
+            wclipindex = 0
             for w_idx in w_idx_list:
+                print("w clip index:", wclipindex)
+                wclipindex += 1
                 in_patch = lq[..., h_idx:h_idx+size_patch_testing, w_idx:w_idx+size_patch_testing]
+                print("w checkpoint 1")
                 out_patch = model(in_patch).detach().cpu()
-
+                print("w checkpoint 2")
                 out_patch_mask = torch.ones_like(out_patch)
 
                 if not_overlap_border:
@@ -362,6 +378,7 @@ def test_clip(lq, model, args):
                     if w_idx > w_idx_list[0]:
                         out_patch[..., :, :overlap_size//2] *= 0
                         out_patch_mask[..., :, :overlap_size//2] *= 0
+                print("w checkpoint 3")
 
                 E[..., h_idx*sf:(h_idx+size_patch_testing)*sf, w_idx*sf:(w_idx+size_patch_testing)*sf].add_(out_patch)
                 W[..., h_idx*sf:(h_idx+size_patch_testing)*sf, w_idx*sf:(w_idx+size_patch_testing)*sf].add_(out_patch_mask)
@@ -378,7 +395,7 @@ def test_clip(lq, model, args):
         output = model(lq).detach().cpu()
 
         output = output[:, :, :, :h_old*sf, :w_old*sf]
-
+    print("done testing clip")
     return output
 
 
