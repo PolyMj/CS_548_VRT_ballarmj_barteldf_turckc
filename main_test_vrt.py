@@ -360,9 +360,9 @@ def test_clip(lq, model, args):
                 print("w clip index:", wclipindex)
                 wclipindex += 1
                 in_patch = lq[..., h_idx:h_idx+size_patch_testing, w_idx:w_idx+size_patch_testing]
-                print("w checkpoint 1")
+                #print("w checkpoint 1")
                 out_patch = model(in_patch).detach().cpu()
-                print("w checkpoint 2")
+                #print("w checkpoint 2")
                 out_patch_mask = torch.ones_like(out_patch)
 
                 if not_overlap_border:
@@ -378,7 +378,7 @@ def test_clip(lq, model, args):
                     if w_idx > w_idx_list[0]:
                         out_patch[..., :, :overlap_size//2] *= 0
                         out_patch_mask[..., :, :overlap_size//2] *= 0
-                print("w checkpoint 3")
+                #print("w checkpoint 3")
 
                 E[..., h_idx*sf:(h_idx+size_patch_testing)*sf, w_idx*sf:(w_idx+size_patch_testing)*sf].add_(out_patch)
                 W[..., h_idx*sf:(h_idx+size_patch_testing)*sf, w_idx*sf:(w_idx+size_patch_testing)*sf].add_(out_patch_mask)
