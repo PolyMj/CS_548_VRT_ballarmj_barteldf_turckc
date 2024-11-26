@@ -41,6 +41,7 @@ def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model = prepare_model_dataset(args)
     model.eval()
+    print("model evaluated")
     model = model.to(device)
     if 'vimeo' in args.folder_lq.lower():
         if 'videofi' in args.task:
@@ -67,6 +68,7 @@ def main():
                                               'sigma':args.sigma, 'num_frame':-1, 'cache_data': False})
 
     test_loader = DataLoader(dataset=test_set, num_workers=args.num_workers, batch_size=1, shuffle=False)
+    print("dataloader created")
 
     save_dir = f'results/{args.task}'
     if args.save_result:
@@ -79,7 +81,14 @@ def main():
 
     assert len(test_loader) != 0, f'No dataset found at {args.folder_lq}'
 
+    print("about to start main loop")
+    print("number of loops:", len(test_loader))
+    loopindex = 0
+    innerloopindex = 0
     for idx, batch in enumerate(test_loader):
+        print("outer loop", loopindex)
+        loopindex += 1
+        innerloopindex = 0
         lq = batch['L'].to(device)
         folder = batch['folder']
         gt = batch['H'] if 'H' in batch else None
@@ -102,6 +111,8 @@ def main():
         test_results_folder['ssim_y'] = []
 
         for i in range(output.shape[1]):
+            print("inner loop", innerloopindex)
+            innerloopindex += 1
             # save image
             img = output[:, i, ...].data.squeeze().float().cpu().clamp_(0, 1).numpy()
             if img.ndim == 3:

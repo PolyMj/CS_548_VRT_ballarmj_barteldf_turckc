@@ -1,0 +1,1 @@
+python main_test_vrt.py --task 001_VRT_videosr_bi_REDS_6frames --folder_lq testsets/DAVIS-test --folder_gt testsets/DAVIS-test --tile 6 256 256 --tile_overlap 2 20 20 --save_result
