@@ -21,6 +21,6 @@ def downscale_images(input_folder, output_folder, scale_factor):
             cv2.imwrite(output_path, resized_img)
 
 if __name__ == "__main__":
-    input_folder = "testsets/DVD10/smalltestgt/01_IMG_0030"
-    output_folder = "testsets/DVD10/lowres/downgt"
+    input_folder = "testsets/gopro_test_GT/GOPR0871_11_00_this_one"
+    output_folder = "testsets/downscaled/gopro/00"
     downscale_images(input_folder, output_folder, 0.25)

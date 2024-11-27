@@ -1,0 +1,2 @@
+python main_test_vrt.py --task 001_VRT_videosr_bi_REDS_6frames --folder_lq testsets/downscaled/gopro --folder_gt testsets/temp_gt --tile 20 128 128 --tile_overlap 2 20 20 --num_workers 8 --save_result
+-- Average PSNR: 23.91 dB; SSIM: 0.8060; PSNR_Y: 25.27 dB; SSIM_Y: 0.8202
