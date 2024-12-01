@@ -4,3 +4,6 @@ testsets/
 **__pycache__**
 testsets
 **.pth
+
+!results/MinecraftExample
+!results/MinecraftExample/**
