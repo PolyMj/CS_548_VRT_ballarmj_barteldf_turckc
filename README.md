@@ -1,3 +1,15 @@
+This is a fork created for a CS 548 class project at SUNY Polytechnic Institute.
+The class project consists of members Michael Ballard, Dylan Bartell, and Caden Turck.
+Original datasets will be automatically downloaded if the scripts under "Quick Testing" are used, or they can be downloaded
+manually from https://github.com/JingyunLiang/VRT/releases
+- Extra datasets and results can be found at https://drive.google.com/drive/u/2/folders/1LvScYVUO51QZSzIoRaZhRJyX5N_8WRPP
+Experiment scripts examples are provided under "Quick Testing".
+The downscale_vid.py program can be used to downscale vids for running through VSR and comparing to the original.
+- To run the script, specify the input and output frame folders at the bottom of the program.
+
+
+
+
 # VRT: A Video Restoration Transformer
 [Jingyun Liang](https://jingyunliang.github.io), [Jiezhang Cao](https://www.jiezhangcao.com/), [Yuchen Fan](https://ychfan.github.io/), [Kai Zhang](https://cszn.github.io/), Rakesh Ranjan, [Yawei Li](https://ofsoundof.github.io/), [Radu Timofte](http://people.ee.ethz.ch/~timofter/),  [Luc Van Gool](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en)
 
