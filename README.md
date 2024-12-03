@@ -1,5 +1,8 @@
 This is a fork created for a CS 548 class project at SUNY Polytechnic Institute.
 The class project consists of members Michael Ballard, Dylan Bartell, and Caden Turck.
+
+
+# ORIGINAL README
 Original datasets will be automatically downloaded if the scripts under "Quick Testing" are used, or they can be downloaded
 manually from https://github.com/JingyunLiang/VRT/releases
 - Extra datasets and results can be found at https://drive.google.com/drive/u/2/folders/1LvScYVUO51QZSzIoRaZhRJyX5N_8WRPP
